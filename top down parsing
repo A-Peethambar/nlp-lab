@@ -1,0 +1,20 @@
+import nltk
+
+def top_down_parsing(grammar, sentence):
+    parser = nltk.ChartParser(grammar)
+    for tree in parser.parse(sentence.split()):
+        print(tree)
+
+grammar = nltk.CFG.fromstring("""
+S -> NP VP
+NP -> Det N | NP PP
+VP -> V NP | VP PP
+PP -> P NP
+Det -> 'the' | 'a'
+N -> 'dog' | 'cat' | 'man' | 'park'
+V -> 'chased' | 'saw'
+P -> 'in' | 'on'
+""")
+
+sentence = 'the dog chased the cat in the park'
+top_down_parsing(grammar, sentence)

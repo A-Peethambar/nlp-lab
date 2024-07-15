@@ -1,0 +1,29 @@
+import nltk
+
+# Ensure you have downloaded the necessary NLTK data files
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+# Sentence to be processed
+sent = "one cat chased a mouse in the garden"
+
+# Tokenize the sentence
+tokens = nltk.word_tokenize(sent)
+
+# POS tagging the tokens
+tagged = nltk.pos_tag(tokens)
+
+# Define the grammar for chunking
+pattern = 'NP: {<DT>?<NN>*<NN>}'
+
+# Create a chunk parser with the specified pattern
+chunk_parser = nltk.RegexpParser(pattern)
+
+# Apply the chunk parser to the tagged tokens
+chunk_sentence = chunk_parser.parse(tagged)
+
+# Print the chunked sentence
+print(chunk_sentence)
+
+# Draw the chunk tree
+chunk_sentence.draw()

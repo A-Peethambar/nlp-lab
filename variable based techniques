@@ -1,0 +1,20 @@
+import re
+
+text = "The quick brown fox jumps over the lazy dog"
+
+variables = {
+    "animals": r"(fox|dog)",
+    "action": r"(jumps|runs)",
+    "adjective": r"(quick|lazy|brown)"
+}
+
+variable_values = {}
+
+for var, pattern in variables.items():
+    match = re.search(pattern, text)
+    if match:
+        variable_values[var] = match.group()
+
+print("Variable values extracted from text:")
+for var, value in variable_values.items():
+    print(f"{var}: {value}")
